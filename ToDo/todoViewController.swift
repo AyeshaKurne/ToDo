@@ -9,7 +9,7 @@
 import UIKit
 
 class ToDoViewController: UITableViewController {
-    let itemArray = ["Find Mike", "Buy Eggs", "Destroy Demogorgon"]
+      var itemArray = ["Find Mike", "Buy Eggs", "Destroy Demogorgon"]
     
 
     override func viewDidLoad() {
@@ -46,7 +46,29 @@ class ToDoViewController: UITableViewController {
         
         
     }
-
-
+//MARK - Add new items
+    
+    @IBAction func adButtonPressed(_ sender: Any) {
+        
+        var textField = UITextField()
+        
+        let alert = UIAlertController(title: "Add new Item", message: "", preferredStyle: .alert)
+        let action = UIAlertAction(title: "Add Item", style: .default) { (action) in
+         
+            //response after clicking the add item button
+            self.itemArray.append(textField.text!)
+            self.tableView.reloadData()
+            
+        }
+        alert.addTextField { (alertTextField) in
+            alertTextField.placeholder = "Create New Item"
+            textField = alertTextField
+            
+        }
+        alert.addAction(action) 
+        present(alert, animated: true, completion: nil)
+        
+    }
+    
 }
 
